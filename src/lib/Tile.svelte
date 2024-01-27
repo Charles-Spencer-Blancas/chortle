@@ -13,10 +13,10 @@
 
 <style>
     div {
-        width: 10rem;
-        height: 10rem;
+        width: 5rem;
+        height: 5rem;
         border-style: solid;
-        font-size: 8rem;
+        font-size: 4rem;
         display: flex;
         align-items: center;
         justify-content: center;

@@ -72,10 +72,19 @@
 </script>
 
 <Chess />
-<Guess status={statuses[0]} word={guesses[0]} />
-<Guess status={statuses[1]} word={guesses[1]} />
-<Guess status={statuses[2]} word={guesses[2]} />
-<Guess status={statuses[3]} word={guesses[3]} />
-<Guess status={statuses[4]} word={guesses[4]} />
-
+<div class="guesses">
+    <Guess status={statuses[0]} word={guesses[0]} />
+    <Guess status={statuses[1]} word={guesses[1]} />
+    <Guess status={statuses[2]} word={guesses[2]} />
+    <Guess status={statuses[3]} word={guesses[3]} />
+    <Guess status={statuses[4]} word={guesses[4]} />
+</div>
 <svelte:window on:keydown={onKeyDown} />
+
+<style>
+    .guesses {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5em;
+    }
+</style>

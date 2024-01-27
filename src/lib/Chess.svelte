@@ -20,7 +20,8 @@
     // Play a move and toggle whose turn it is
     function playOtherSide(chessground, chess) {
         return (orig, dest) => {
-            chess.move({ from: orig, to: dest });
+            let moved = chess.move({ from: orig, to: dest });
+            console.log(moved);
             const color = chess.turn() == "w" ? "white" : "black";
             chessground.set({
                 turnColor: color,
@@ -32,6 +33,7 @@
         };
     }
 
+    //let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
     let fen = "5rk1/1p3ppp/pq3b2/8/8/1P1Q1N2/P4PPP/3R2K1 w - - 2 27";
     let fenSplit = fen.split(" ");
     let computerMove = fenSplit[1];
