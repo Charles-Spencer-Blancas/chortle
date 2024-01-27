@@ -1,5 +1,13 @@
 <script>
+    import { Chessground } from "svelte-chessground";
     import Guess from "./Guess.svelte";
+
+    /* THIS IS THE CHESS PART */
+    let fen = "r6k/pp2r2p/4Rp1Q/3p4/8/1N1P2R1/PqP2bPP/7K b - - 0 24";
+
+    let chessground;
+
+    /* THIS IS THE WORDLE PART */
     let guesses = ["", "", "", "", ""];
     let statuses = [
         [-1, -1, -1, -1, -1],
@@ -68,10 +76,11 @@
     };
 </script>
 
+<Chessground bind:this={chessground} {config} {fen} viewOnly={true} />
 <Guess status={statuses[0]} word={guesses[0]} />
 <Guess status={statuses[1]} word={guesses[1]} />
 <Guess status={statuses[2]} word={guesses[2]} />
 <Guess status={statuses[3]} word={guesses[3]} />
 <Guess status={statuses[4]} word={guesses[4]} />
 
-<svelte:window on:keydown|preventDefault={onKeyDown} />
+<svelte:window on:keydown={onKeyDown} />
