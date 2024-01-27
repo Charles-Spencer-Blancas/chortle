@@ -76,7 +76,7 @@
     };
 </script>
 
-<Chessground bind:this={chessground} {config} {fen} viewOnly={true} />
+<Chessground bind:this={chessground} {fen} viewOnly={true} />
 <Guess status={statuses[0]} word={guesses[0]} />
 <Guess status={statuses[1]} word={guesses[1]} />
 <Guess status={statuses[2]} word={guesses[2]} />
