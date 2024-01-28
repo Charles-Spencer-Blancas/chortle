@@ -12,6 +12,7 @@
         [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
         [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     ];
+    let chessDone = false;
     let answer = "DREAM";
     let chessAnswer = "Rf8d8";
     let currentActive = 0;
@@ -74,6 +75,10 @@
             out[i] = 0;
         }
 
+        if (chessDone) {
+            chessGuess = chessAnswer;
+        }
+
         for (let i = 0; i < chessGuess.length; i++) {
             if (chessGuess[i] === chessAnswer[i]) {
                 out[i + 5] = 2;
@@ -88,6 +93,14 @@
             out[i + 5] = 0;
         }
 
+        for (let i = 0; i < chessGuess.length; i++) {
+            if (out[i + 5] !== 2) {
+                return out;
+            }
+        }
+
+        chessDone = true;
+
         return out;
     };
 
@@ -96,6 +109,7 @@
             wordGuesses[currentActive],
             chessMoveValue,
         );
+
         if (currentActive === 4) {
             gameOver = true;
         }
@@ -109,26 +123,36 @@
         status={statuses[0]}
         word={wordGuesses[0]}
         chessGuess={chessGuesses[0]}
+        {chessDone}
+        {chessAnswer}
     />
     <Guess
         status={statuses[1]}
         word={wordGuesses[1]}
         chessGuess={chessGuesses[1]}
+        {chessDone}
+        {chessAnswer}
     />
     <Guess
         status={statuses[2]}
         word={wordGuesses[2]}
         chessGuess={chessGuesses[2]}
+        {chessDone}
+        {chessAnswer}
     />
     <Guess
         status={statuses[3]}
         word={wordGuesses[3]}
         chessGuess={chessGuesses[3]}
+        {chessDone}
+        {chessAnswer}
     />
     <Guess
         status={statuses[4]}
         word={wordGuesses[4]}
         chessGuess={chessGuesses[4]}
+        {chessDone}
+        {chessAnswer}
     />
 </div>
 <svelte:window on:keydown={onKeyDown} />
