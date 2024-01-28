@@ -15,11 +15,11 @@
         [-1, -1, -1, -1, -1],
     ];
     let chessStatuses = [
-        [-1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1],
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1],
+        [-1, -1, -1, -1],
     ];
 
     let chessDoneValue;
@@ -28,7 +28,7 @@
     });
 
     let answer = "DREAM";
-    let chessAnswer = "Rf8d8";
+    let chessAnswer = "f8d8";
     let currentActive = 0;
 
     let gameOverValue;
@@ -155,7 +155,7 @@
 
         if (chessDoneValue) {
             chessGuesses[currentActive] = chessAnswer;
-            chessStatuses[currentActive] = [2, 2, 2, 2, 2];
+            chessStatuses[currentActive] = [2, 2, 2, 2];
         } else {
             chessMove.set("");
         }

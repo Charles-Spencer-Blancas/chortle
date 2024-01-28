@@ -60,7 +60,7 @@
                 viewOnly: true,
             });
 
-            chessMove.set(moved.piece.toUpperCase() + moved.from + moved.to);
+            chessMove.set(moved.from + moved.to);
         };
     }
 

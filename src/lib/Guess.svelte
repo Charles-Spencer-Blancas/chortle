@@ -20,7 +20,6 @@
         <Tile letter={chessGuess[1] || ""} status={chessStatus[1]} />
         <Tile letter={chessGuess[2] || ""} status={chessStatus[2]} />
         <Tile letter={chessGuess[3] || ""} status={chessStatus[3]} />
-        <Tile letter={chessGuess[4] || ""} status={chessStatus[4]} />
     </div>
 </div>
 
