@@ -18,6 +18,12 @@
         }
     });
 
+    function randomPartyEmoji() {
+        let possible = ["🎉", "🥳", "🎊", "🎈", "🍾", "🥂"];
+        let index = Math.floor(Math.random() * possible.length);
+        return possible[index];
+    }
+
     function numberToSquare(number) {
         switch (number) {
             case 0: {
@@ -30,6 +36,7 @@
                 return "🟩";
             }
             default: {
+                return randomPartyEmoji();
             }
         }
     }

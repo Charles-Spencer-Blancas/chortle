@@ -141,6 +141,11 @@
         statuses[currentActive] = comparison.slice(0, 5);
         chessStatuses[currentActive] = comparison.slice(5);
 
+        if (checkWin(comparison)) {
+            gameOver.set(true);
+            return;
+        }
+
         if (currentActive === 4) {
             gameOver.set(true);
             return;
