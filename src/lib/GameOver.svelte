@@ -8,7 +8,7 @@
     export let statuses;
     export let chessStatuses;
 
-    const shareMessage = "http://chortle.select\n";
+    const shareMessage = "https://chortle.select\n";
     let gameSummary = "";
 
     let gameOverValue;
