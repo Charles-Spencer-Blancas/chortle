@@ -1,12 +1,14 @@
 <script>
     import Modal from "./Modal.svelte";
     import { gameOver } from "../stores";
+    import { copy } from "svelte-copy";
 
     export let word;
     export let move;
     export let statuses;
     export let chessStatuses;
 
+    const shareMessage = "http://chortle.select\n";
     let gameSummary = "";
 
     let gameOverValue;
@@ -62,6 +64,7 @@
     <h1>Game Over</h1>
     <h4>The answer was {word} and {move}</h4>
     <p class="summary">{gameSummary}</p>
+    <button use:copy={shareMessage + gameSummary}>Share</button>
 </Modal>
 
 <style>
