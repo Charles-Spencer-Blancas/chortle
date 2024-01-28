@@ -2,12 +2,25 @@
     import { Chessground } from "svelte-chessground";
     import { Chess, SQUARES } from "chess.js";
     import { onMount } from "svelte";
-    import { chessMove } from "../stores";
+    import { chessMove, chessDone } from "../stores";
+
+    const chess = new Chess();
+    let chessground;
 
     let chessMoveValue;
-
     chessMove.subscribe((value) => {
         chessMoveValue = value;
+    });
+
+    let chessDoneValue;
+    chessDone.subscribe((value) => {
+        chessDoneValue = value;
+
+        if (value == true) {
+            chessground.set({
+                viewOnly: true,
+            });
+        }
     });
 
     // Find all legal moves
@@ -47,9 +60,6 @@
     let orientation = computerMove === "w" ? "black" : "white";
     let movesString = "d3d6 f8d8 d6d8 f6d8";
     let moves = movesString.split(" ");
-
-    const chess = new Chess();
-    let chessground;
 
     function resetChessboard() {
         chessground.set({
@@ -91,4 +101,4 @@
 </script>
 
 <Chessground bind:this={chessground} />
-<button on:click={undo}>Undo</button>
+<button on:click={undo} disabled={chessDoneValue}>Undo</button>
