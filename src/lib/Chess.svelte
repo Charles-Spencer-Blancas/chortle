@@ -56,21 +56,22 @@
             viewOnly: false,
             fen: fen,
             orientation: orientation,
-            movable: { events: { after: moved(chessground, chess) } },
         });
         chess.load(fen);
 
         let origin = moves[0].slice(0, 2);
         let dest = moves[0].slice(2, 4);
+
         chess.move({ from: origin, to: dest });
         chessground.move(origin, dest);
 
-        const color = chess.turn() == "w" ? "white" : "black";
+        const color = chess.turn() === "w" ? "white" : "black";
         chessground.set({
             turnColor: color,
             movable: {
                 color: color,
                 dests: toDests(chess),
+                free: false,
             },
         });
 
@@ -82,6 +83,9 @@
     }
 
     onMount(async () => {
+        chessground.set({
+            movable: { events: { after: moved(chessground, chess) } },
+        });
         resetChessboard();
     });
 </script>

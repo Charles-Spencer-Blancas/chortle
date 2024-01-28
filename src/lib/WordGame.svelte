@@ -12,7 +12,7 @@
         [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
         [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     ];
-    let answer = "PIGMY";
+    let answer = "DREAM";
     let chessAnswer = "Rf8d8";
     let currentActive = 0;
     let gameOver = false;
