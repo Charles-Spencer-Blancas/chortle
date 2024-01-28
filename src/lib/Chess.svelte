@@ -4,12 +4,24 @@
     import { onMount } from "svelte";
     import { chessMove, chessDone } from "../stores";
 
+    let firstChessMoveSubscribe = true;
+
     const chess = new Chess();
     let chessground;
 
     let chessMoveValue;
     chessMove.subscribe((value) => {
+        console.log("value", value);
         chessMoveValue = value;
+
+        if (!firstChessMoveSubscribe) {
+            if (value === "") {
+                console.log("Should reset");
+                resetChessboard();
+            }
+        } else {
+            firstChessMoveSubscribe = false;
+        }
     });
 
     let chessDoneValue;

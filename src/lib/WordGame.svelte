@@ -118,9 +118,13 @@
         if (currentActive === 4) {
             gameOver = true;
         }
+
         currentActive += 1;
+
         if (chessDoneValue) {
             chessGuesses[currentActive] = chessAnswer;
+        } else {
+            chessMove.set("");
         }
     };
 </script>
