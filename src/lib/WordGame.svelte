@@ -138,13 +138,12 @@
             chessMoveValue,
         );
 
-        if (checkWin(comparison)) {
-        }
         statuses[currentActive] = comparison.slice(0, 5);
         chessStatuses[currentActive] = comparison.slice(5);
 
         if (currentActive === 4) {
             gameOver.set(true);
+            return;
         }
 
         currentActive += 1;
@@ -159,7 +158,7 @@
 </script>
 
 <Instructions />
-<GameOver word={answer} move={chessAnswer} />
+<GameOver word={answer} move={chessAnswer} {statuses} {chessStatuses} />
 <Chess />
 <div class="guesses">
     <Guess
