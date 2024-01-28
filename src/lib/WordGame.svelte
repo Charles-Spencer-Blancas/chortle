@@ -1,10 +1,10 @@
 <script>
     import Chess from "./Chess.svelte";
     import Guess from "./Guess.svelte";
-    import { chessMove, chessDone } from "../stores";
+    import { chessMove, chessDone, gameOver } from "../stores";
     import Instructions from "./Instructions.svelte";
+    import GameOver from "./GameOver.svelte";
 
-    let showInstructions = true;
     let wordGuesses = ["", "", "", "", ""];
     let chessGuesses = ["", "", "", "", ""];
     let statuses = [
@@ -30,7 +30,11 @@
     let answer = "DREAM";
     let chessAnswer = "Rf8d8";
     let currentActive = 0;
-    let gameOver = false;
+
+    let gameOverValue;
+    gameOver.subscribe((value) => {
+        gameOverValue = value;
+    });
 
     let chessMoveValue;
     chessMove.subscribe((value) => {
@@ -118,16 +122,29 @@
         return out;
     };
 
+    let checkWin = (comparison) => {
+        for (let i = 0; i < comparison.length; i++) {
+            if (comparison[i] !== 2) {
+                return false;
+            }
+        }
+
+        return true;
+    };
+
     let submitGuess = () => {
         let comparison = compareWithAnswer(
             wordGuesses[currentActive],
             chessMoveValue,
         );
+
+        if (checkWin(comparison)) {
+        }
         statuses[currentActive] = comparison.slice(0, 5);
         chessStatuses[currentActive] = comparison.slice(5);
 
         if (currentActive === 4) {
-            gameOver = true;
+            gameOver.set(true);
         }
 
         currentActive += 1;
@@ -142,6 +159,7 @@
 </script>
 
 <Instructions />
+<GameOver word={answer} move={chessAnswer} />
 <Chess />
 <div class="guesses">
     <Guess
