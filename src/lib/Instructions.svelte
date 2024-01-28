@@ -1,4 +1,5 @@
 <script>
+    import Modal from "./Modal.svelte";
     import { showInstructions } from "../stores";
 
     let showInstructionsValue;
@@ -11,7 +12,7 @@
     };
 </script>
 
-<div class="card" style:display={showInstructionsValue ? "block" : "none"}>
+<Modal show={showInstructionsValue}>
     <h1>Instructions</h1>
     <h4>Guess the word and find the best chess move in 5 moves</h4>
 
@@ -23,16 +24,4 @@
     </ol>
 
     <button on:click={closeInstructions}>Understood</button>
-</div>
-
-<style>
-    .card {
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        z-index: 100;
-        background-color: white;
-        border-radius: 10px;
-    }
-</style>
+</Modal>
