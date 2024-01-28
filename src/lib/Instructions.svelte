@@ -20,7 +20,7 @@
         <li>Green means the symbol is in the right place</li>
         <li>Yellow means the symbol is in another spot</li>
         <li>Gray means the symbol is not there</li>
-        <li>At least one letter in the best move is in the word</li>
+        <li>Both letters in the chess move are in the secret word</li>
     </ol>
 
     <button on:click={closeInstructions}>Understood</button>

@@ -22,7 +22,7 @@ def get_fen_and_moves(line):
 def random_valid_word(letters, words):
     possible = []
     for word in words:
-        if letters[0] in word or letters[1] in word:
+        if letters[0] in word and letters[1] in word:
             possible += [word]
 
     return random.choice(possible)
