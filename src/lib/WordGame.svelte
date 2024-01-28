@@ -2,7 +2,9 @@
     import Chess from "./Chess.svelte";
     import Guess from "./Guess.svelte";
     import { chessMove, chessDone } from "../stores";
+    import Instructions from "./Instructions.svelte";
 
+    let showInstructions = true;
     let wordGuesses = ["", "", "", "", ""];
     let chessGuesses = ["", "", "", "", ""];
     let statuses = [
@@ -139,6 +141,7 @@
     };
 </script>
 
+<Instructions />
 <Chess />
 <div class="guesses">
     <Guess
