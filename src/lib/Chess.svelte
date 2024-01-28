@@ -2,6 +2,13 @@
     import { Chessground } from "svelte-chessground";
     import { Chess, SQUARES } from "chess.js";
     import { onMount } from "svelte";
+    import { chessMove } from "../stores";
+
+    let chessMoveValue;
+
+    chessMove.subscribe((value) => {
+        chessMoveValue = value;
+    });
 
     // Find all legal moves
     function toDests(chess) {
@@ -18,18 +25,17 @@
     }
 
     // Play a move and toggle whose turn it is
-    function playOtherSide(chessground, chess) {
+    function moved(chessground, chess) {
         return (orig, dest) => {
             let moved = chess.move({ from: orig, to: dest });
             console.log(moved);
             const color = chess.turn() == "w" ? "white" : "black";
             chessground.set({
                 turnColor: color,
-                movable: {
-                    color: color,
-                    dests: toDests(chess),
-                },
+                viewOnly: true,
             });
+
+            chessMove.set(moved.piece.toUpperCase() + moved.from + moved.to);
         };
     }
 
@@ -45,21 +51,15 @@
     const chess = new Chess();
     let chessground;
 
-    let config = {
-        fen: fen,
-        movable: {
-            color: "white",
-            free: false,
-            dests: toDests(chess),
-        },
-    };
-
-    onMount(async () => {
+    function resetChessboard() {
         chessground.set({
+            viewOnly: false,
+            fen: fen,
             orientation: orientation,
-            movable: { events: { after: playOtherSide(chessground, chess) } },
+            movable: { events: { after: moved(chessground, chess) } },
         });
         chess.load(fen);
+
         let origin = moves[0].slice(0, 2);
         let dest = moves[0].slice(2, 4);
         chess.move({ from: origin, to: dest });
@@ -73,7 +73,18 @@
                 dests: toDests(chess),
             },
         });
+
+        chessMove.set("");
+    }
+
+    function undo() {
+        resetChessboard();
+    }
+
+    onMount(async () => {
+        resetChessboard();
     });
 </script>
 
-<Chessground bind:this={chessground} {config} />
+<Chessground bind:this={chessground} />
+<button on:click={undo}>Undo</button>

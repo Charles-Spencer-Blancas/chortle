@@ -1,5 +1,12 @@
 <script>
     import Tile from "./Tile.svelte";
+    import { chessMove } from "../stores";
+
+    let chessMoveValue;
+
+    chessMove.subscribe((value) => {
+        chessMoveValue = value;
+    });
 
     export let status;
     export let word;
@@ -24,6 +31,27 @@
     />
     <Tile
         letter={word[4] || ""}
+        status={status.length === 0 ? -1 : status[4]}
+    />
+
+    <Tile
+        letter={chessMoveValue[0] || ""}
+        status={status.length === 0 ? -1 : status[4]}
+    />
+    <Tile
+        letter={chessMoveValue[1] || ""}
+        status={status.length === 0 ? -1 : status[4]}
+    />
+    <Tile
+        letter={chessMoveValue[2] || ""}
+        status={status.length === 0 ? -1 : status[4]}
+    />
+    <Tile
+        letter={chessMoveValue[3] || ""}
+        status={status.length === 0 ? -1 : status[4]}
+    />
+    <Tile
+        letter={chessMoveValue[4] || ""}
         status={status.length === 0 ? -1 : status[4]}
     />
 </div>
