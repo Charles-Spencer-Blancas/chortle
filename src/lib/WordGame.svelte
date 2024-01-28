@@ -4,6 +4,7 @@
     import { chessMove, chessDone, gameOver } from "../stores";
     import Instructions from "./Instructions.svelte";
     import GameOver from "./GameOver.svelte";
+    import { games } from "../games/output";
 
     let wordGuesses = ["", "", "", "", ""];
     let chessGuesses = ["", "", "", "", ""];
@@ -22,13 +23,20 @@
         [-1, -1, -1, -1],
     ];
 
+    function getRandomElement(array) {
+        let randomIndex = Math.floor(Math.random() * array.length);
+        return array[randomIndex];
+    }
+
     let chessDoneValue;
     chessDone.subscribe((value) => {
         chessDoneValue = value;
     });
 
-    let answer = "DREAM";
-    let chessAnswer = "f8d8";
+    let game = getRandomElement(games);
+    console.log(game);
+    let answer = game.word.toUpperCase();
+    let chessAnswer = game.moves.split(" ")[1];
     let currentActive = 0;
 
     let gameOverValue;
@@ -164,7 +172,7 @@
 
 <Instructions />
 <GameOver word={answer} move={chessAnswer} {statuses} {chessStatuses} />
-<Chess />
+<Chess fen={game.fen} movesString={game.moves} />
 <div class="guesses">
     <Guess
         status={statuses[0]}

@@ -4,6 +4,8 @@
     import { onMount } from "svelte";
     import { chessMove, chessDone } from "../stores";
 
+    export let fen;
+    export let movesString;
     let firstChessMoveSubscribe = true;
 
     const chess = new Chess();
@@ -65,12 +67,12 @@
     }
 
     //let fen = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
-    let fen = "5rk1/1p3ppp/pq3b2/8/8/1P1Q1N2/P4PPP/3R2K1 w - - 2 27";
+    // let fen = "5rk1/1p3ppp/pq3b2/8/8/1P1Q1N2/P4PPP/3R2K1 w - - 2 27";
     let fenSplit = fen.split(" ");
     let computerMove = fenSplit[1];
     // The opponent moves first, so the user is the opposite color
     let orientation = computerMove === "w" ? "black" : "white";
-    let movesString = "d3d6 f8d8 d6d8 f6d8";
+    //let movesString = "d3d6 f8d8 d6d8 f6d8";
     let moves = movesString.split(" ");
 
     function resetChessboard() {
