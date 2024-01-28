@@ -1,3 +1,4 @@
+# Chortle
 ## Inspiration
 I've been enjoying the short daily games, the "dles" as many people like to call them, and I wanted to make my own. I enjoy that it takes so quick to complete one game, but I still love that it stretches my brain a little. 
 
