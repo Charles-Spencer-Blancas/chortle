@@ -1,15 +1,9 @@
 <script>
     import Tile from "./Tile.svelte";
-    import { chessMove } from "../stores";
-
-    let chessMoveValue;
-
-    chessMove.subscribe((value) => {
-        chessMoveValue = value;
-    });
 
     export let status;
     export let word;
+    export let chessGuess;
 </script>
 
 <div class="tiles">
@@ -35,24 +29,24 @@
     />
 
     <Tile
-        letter={chessMoveValue[0] || ""}
-        status={status.length === 0 ? -1 : status[4]}
+        letter={chessGuess[0] || ""}
+        status={status.length === 0 ? -1 : status[5]}
     />
     <Tile
-        letter={chessMoveValue[1] || ""}
-        status={status.length === 0 ? -1 : status[4]}
+        letter={chessGuess[1] || ""}
+        status={status.length === 0 ? -1 : status[6]}
     />
     <Tile
-        letter={chessMoveValue[2] || ""}
-        status={status.length === 0 ? -1 : status[4]}
+        letter={chessGuess[2] || ""}
+        status={status.length === 0 ? -1 : status[7]}
     />
     <Tile
-        letter={chessMoveValue[3] || ""}
-        status={status.length === 0 ? -1 : status[4]}
+        letter={chessGuess[3] || ""}
+        status={status.length === 0 ? -1 : status[8]}
     />
     <Tile
-        letter={chessMoveValue[4] || ""}
-        status={status.length === 0 ? -1 : status[4]}
+        letter={chessGuess[4] || ""}
+        status={status.length === 0 ? -1 : status[9]}
     />
 </div>
 

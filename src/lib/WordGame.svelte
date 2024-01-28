@@ -1,9 +1,10 @@
 <script>
     import Chess from "./Chess.svelte";
     import Guess from "./Guess.svelte";
+    import { chessMove } from "../stores";
 
-    /* THIS IS THE WORDLE PART */
-    let guesses = ["", "", "", "", ""];
+    let wordGuesses = ["", "", "", "", ""];
+    let chessGuesses = ["", "", "", "", ""];
     let statuses = [
         [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
         [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
@@ -12,8 +13,15 @@
         [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
     ];
     let answer = "PIGMY";
+    let chessAnswer = "Rf8d8";
     let currentActive = 0;
     let gameOver = false;
+
+    let chessMoveValue;
+    chessMove.subscribe((value) => {
+        chessMoveValue = value;
+        chessGuesses[currentActive] = value;
+    });
 
     let onKeyDown = (e) => {
         let key = e.key;
@@ -23,28 +31,35 @@
 
         if (regex.test(key)) {
             key = key.toUpperCase();
-            if (guesses[currentActive].length < 5) {
-                guesses[currentActive] = guesses[currentActive] + key;
+            if (wordGuesses[currentActive].length < 5) {
+                wordGuesses[currentActive] = wordGuesses[currentActive] + key;
             }
             return;
         }
 
         if (key == "Backspace") {
-            if (guesses[currentActive].length > 0) {
-                guesses[currentActive] = guesses[currentActive].slice(0, -1);
+            if (wordGuesses[currentActive].length > 0) {
+                wordGuesses[currentActive] = wordGuesses[currentActive].slice(
+                    0,
+                    -1,
+                );
             }
             return;
         }
 
         if (key == "Enter") {
-            if (guesses[currentActive].length === 5) {
+            if (
+                wordGuesses[currentActive].length === 5 &&
+                chessMoveValue != ""
+            ) {
                 submitGuess();
             }
         }
     };
 
-    let compareWithAnswer = (guess) => {
+    let compareWithAnswer = (guess, chessGuess) => {
         let out = [];
+
         for (let i = 0; i < guess.length; i++) {
             if (guess[i] === answer[i]) {
                 out[i] = 2;
@@ -59,11 +74,28 @@
             out[i] = 0;
         }
 
+        for (let i = 0; i < chessGuess.length; i++) {
+            if (chessGuess[i] === chessAnswer[i]) {
+                out[i + 5] = 2;
+                continue;
+            }
+
+            if (chessAnswer.includes(chessGuess[i])) {
+                out[i + 5] = 1;
+                continue;
+            }
+
+            out[i + 5] = 0;
+        }
+
         return out;
     };
 
     let submitGuess = () => {
-        statuses[currentActive] = compareWithAnswer(guesses[currentActive]);
+        statuses[currentActive] = compareWithAnswer(
+            wordGuesses[currentActive],
+            chessMoveValue,
+        );
         if (currentActive === 4) {
             gameOver = true;
         }
@@ -73,11 +105,31 @@
 
 <Chess />
 <div class="guesses">
-    <Guess status={statuses[0]} word={guesses[0]} />
-    <Guess status={statuses[1]} word={guesses[1]} />
-    <Guess status={statuses[2]} word={guesses[2]} />
-    <Guess status={statuses[3]} word={guesses[3]} />
-    <Guess status={statuses[4]} word={guesses[4]} />
+    <Guess
+        status={statuses[0]}
+        word={wordGuesses[0]}
+        chessGuess={chessGuesses[0]}
+    />
+    <Guess
+        status={statuses[1]}
+        word={wordGuesses[1]}
+        chessGuess={chessGuesses[1]}
+    />
+    <Guess
+        status={statuses[2]}
+        word={wordGuesses[2]}
+        chessGuess={chessGuesses[2]}
+    />
+    <Guess
+        status={statuses[3]}
+        word={wordGuesses[3]}
+        chessGuess={chessGuesses[3]}
+    />
+    <Guess
+        status={statuses[4]}
+        word={wordGuesses[4]}
+        chessGuess={chessGuesses[4]}
+    />
 </div>
 <svelte:window on:keydown={onKeyDown} />
 
