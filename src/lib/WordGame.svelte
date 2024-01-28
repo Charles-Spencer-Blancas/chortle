@@ -6,11 +6,18 @@
     let wordGuesses = ["", "", "", "", ""];
     let chessGuesses = ["", "", "", "", ""];
     let statuses = [
-        [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
-        [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1],
+        [-1, -1, -1, -1, -1],
+        [-1, -1, -1, -1, -1],
+        [-1, -1, -1, -1, -1],
+        [-1, -1, -1, -1, -1],
+        [-1, -1, -1, -1, -1],
+    ];
+    let chessStatuses = [
+        [-1, -1, -1, -1, -1],
+        [-1, -1, -1, -1, -1],
+        [-1, -1, -1, -1, -1],
+        [-1, -1, -1, -1, -1],
+        [-1, -1, -1, -1, -1],
     ];
 
     let chessDoneValue;
@@ -110,10 +117,12 @@
     };
 
     let submitGuess = () => {
-        statuses[currentActive] = compareWithAnswer(
+        let comparison = compareWithAnswer(
             wordGuesses[currentActive],
             chessMoveValue,
         );
+        statuses[currentActive] = comparison.slice(0, 5);
+        chessStatuses[currentActive] = comparison.slice(5);
 
         if (currentActive === 4) {
             gameOver = true;
@@ -123,6 +132,7 @@
 
         if (chessDoneValue) {
             chessGuesses[currentActive] = chessAnswer;
+            chessStatuses[currentActive] = [2, 2, 2, 2, 2];
         } else {
             chessMove.set("");
         }
@@ -133,26 +143,31 @@
 <div class="guesses">
     <Guess
         status={statuses[0]}
+        chessStatus={chessStatuses[0]}
         word={wordGuesses[0]}
         chessGuess={chessGuesses[0]}
     />
     <Guess
         status={statuses[1]}
+        chessStatus={chessStatuses[1]}
         word={wordGuesses[1]}
         chessGuess={chessGuesses[1]}
     />
     <Guess
         status={statuses[2]}
+        chessStatus={chessStatuses[2]}
         word={wordGuesses[2]}
         chessGuess={chessGuesses[2]}
     />
     <Guess
         status={statuses[3]}
+        chessStatus={chessStatuses[3]}
         word={wordGuesses[3]}
         chessGuess={chessGuesses[3]}
     />
     <Guess
         status={statuses[4]}
+        chessStatus={chessStatuses[4]}
         word={wordGuesses[4]}
         chessGuess={chessGuesses[4]}
     />
