@@ -26,11 +26,11 @@
 <style>
     .guess {
         display: flex;
-        gap: 2em;
+        gap: 0.5rem;
     }
 
     .tiles {
         display: flex;
-        gap: 0.5em;
+        gap: 0.15rem;
     }
 </style>

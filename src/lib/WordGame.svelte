@@ -5,6 +5,7 @@
     import Instructions from "./Instructions.svelte";
     import GameOver from "./GameOver.svelte";
     import { games } from "../games/output";
+    import Keyboard from "./Keyboard.svelte";
 
     let wordGuesses = ["", "", "", "", ""];
     let chessGuesses = ["", "", "", "", ""];
@@ -52,7 +53,15 @@
 
     let onKeyDown = (e) => {
         let key = e.key;
+        userInput(key);
+    };
 
+    let onVisualKeyDown = (e) => {
+        let key = e.detail.key;
+        userInput(key);
+    };
+
+    let userInput = (key) => {
         // Single alphabet character
         let regex = new RegExp("^[A-Za-z]$");
 
@@ -205,12 +214,14 @@
         chessGuess={chessGuesses[4]}
     />
 </div>
+<Keyboard on:key={onVisualKeyDown} />
 <svelte:window on:keydown={onKeyDown} />
 
 <style>
     .guesses {
         display: flex;
         flex-direction: column;
-        gap: 0.5em;
+        gap: 0.5rem;
+        margin-bottom: 1rem;
     }
 </style>

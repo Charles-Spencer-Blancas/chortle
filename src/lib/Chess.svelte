@@ -114,5 +114,10 @@
     });
 </script>
 
-<Chessground bind:this={chessground} />
+<div class="chess">
+    <Chessground bind:this={chessground} />
+</div>
 <button on:click={undo} disabled={chessDoneValue}>Undo</button>
+
+<style>
+</style>

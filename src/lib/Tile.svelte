@@ -16,6 +16,7 @@
         width: 2rem;
         height: 2rem;
         border-style: solid;
+        border-width: 1px;
         font-size: 1rem;
         display: flex;
         align-items: center;
