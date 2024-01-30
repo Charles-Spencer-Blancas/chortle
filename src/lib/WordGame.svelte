@@ -28,13 +28,21 @@
         let randomIndex = Math.floor(Math.random() * array.length);
         return array[randomIndex];
     }
+    function getIndexForToday() {
+        const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
+        const startDate = new Date(2024, 1, 30);
+        const currDate = new Date(new Date().toDateString());
+        console.log(Math.round(Math.abs((currDate - startDate) / oneDay)));
+        return Math.round(Math.abs((currDate - startDate) / oneDay));
+    }
 
     let chessDoneValue;
     chessDone.subscribe((value) => {
         chessDoneValue = value;
     });
 
-    let game = getRandomElement(games);
+    let currIndex = getIndexForToday();
+    let game = games[currIndex];
     console.log(game);
     let answer = game.word.toUpperCase();
     let chessAnswer = game.moves.split(" ")[1];
@@ -180,6 +188,7 @@
 </script>
 
 <Instructions />
+<div>Game #{currIndex}</div>
 <GameOver word={answer} move={chessAnswer} {statuses} {chessStatuses} />
 <Chess fen={game.fen} movesString={game.moves} />
 <div class="guesses">
