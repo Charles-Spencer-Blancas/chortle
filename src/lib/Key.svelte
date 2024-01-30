@@ -21,5 +21,6 @@
         min-width: 1rem;
         padding: 0.25rem;
         margin-bottom: 0.5rem;
+        cursor: pointer;
     }
 </style>

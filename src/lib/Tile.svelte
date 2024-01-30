@@ -24,14 +24,14 @@
     }
 
     .green {
-        background-color: green;
+        background-color: var(--green);
     }
 
     .yellow {
-        background-color: yellow;
+        background-color: var(--yellow);
     }
 
     .gray {
-        background-color: gray;
+        background-color: var(--gray);
     }
 </style>

@@ -13,7 +13,8 @@
         left: 50%;
         transform: translate(-50%, -50%);
         z-index: 100;
-        background-color: white;
+        background-color: var(--main);
+        color: var(--text);
         border-radius: 10px;
     }
 </style>
