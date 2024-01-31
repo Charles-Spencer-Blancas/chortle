@@ -13,12 +13,10 @@
 
     let chessMoveValue;
     chessMove.subscribe((value) => {
-        console.log("value", value);
         chessMoveValue = value;
 
         if (!firstChessMoveSubscribe) {
             if (value === "") {
-                console.log("Should reset");
                 resetChessboard();
             }
         } else {
@@ -55,7 +53,6 @@
     function moved(chessground, chess) {
         return (orig, dest) => {
             let moved = chess.move({ from: orig, to: dest });
-            console.log(moved);
             const color = chess.turn() == "w" ? "white" : "black";
             chessground.set({
                 turnColor: color,

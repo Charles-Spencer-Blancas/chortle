@@ -55,7 +55,6 @@
             }
             out += line + "\n";
         }
-        console.log("out", out);
         return out;
     }
 </script>
