@@ -18,6 +18,7 @@
     .key {
         border: solid;
         border-width: 1px;
+        font-size: 1rem;
         min-width: 1rem;
         padding: 0.25rem;
         margin-bottom: 0.5rem;

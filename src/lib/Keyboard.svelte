@@ -3,7 +3,7 @@
     import Key from "./Key.svelte";
 
     const topRow = ["q", "w", "e", "r", "t", "y", "u", "i", "o", "p"];
-    const middleRow = ["a", "s", "d", "f", "g", "h", "j", "k"];
+    const middleRow = ["a", "s", "d", "f", "g", "h", "j", "k", "l"];
     const bottomRow = ["Enter", "z", "x", "c", "v", "b", "n", "m", "Backspace"];
 </script>
 
@@ -31,12 +31,13 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 0.25rem;
+        gap: 0.5rem;
     }
 
     .keyboard {
-        padding: 2rem;
         position: fixed;
+        padding-top: 2rem;
+        padding-bottom: 2rem;
         bottom: 0px;
         left: 0px;
         background-color: var(--main);
