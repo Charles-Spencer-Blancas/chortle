@@ -1,4 +1,4 @@
-export const possibilites = [
+export const possibilities = [
   "aahed",
   "aalii",
   "aargh",

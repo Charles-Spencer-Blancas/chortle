@@ -6,6 +6,8 @@
     import GameOver from "./GameOver.svelte";
     import { games } from "../games/output";
     import Keyboard from "./Keyboard.svelte";
+    import { possibilities } from "../games/possibilities";
+    import GameError from "./GameError.svelte";
 
     let wordGuesses = ["", "", "", "", ""];
     let chessGuesses = ["", "", "", "", ""];
@@ -23,6 +25,7 @@
         [-1, -1, -1, -1],
         [-1, -1, -1, -1],
     ];
+    let message = "";
 
     function getRandomElement(array) {
         let randomIndex = Math.floor(Math.random() * array.length);
@@ -55,6 +58,7 @@
     chessMove.subscribe((value) => {
         chessMoveValue = value;
         chessGuesses[currentActive] = value;
+        message = "";
     });
 
     let onKeyDown = (e) => {
@@ -68,6 +72,7 @@
     };
 
     let userInput = (key) => {
+        message = "";
         // Single alphabet character
         let regex = new RegExp("^[A-Za-z]$");
 
@@ -90,12 +95,7 @@
         }
 
         if (key == "Enter") {
-            if (
-                wordGuesses[currentActive].length === 5 &&
-                chessMoveValue != ""
-            ) {
-                submitGuess();
-            }
+            submitGuess();
         }
     };
 
@@ -156,6 +156,21 @@
     };
 
     let submitGuess = () => {
+        if (wordGuesses[currentActive].length < 5) {
+            message = "Not enough letters";
+            return;
+        }
+
+        if (!possibilities.includes(wordGuesses[currentActive].toLowerCase())) {
+            message = wordGuesses[currentActive] + " not in word list";
+            return;
+        }
+
+        if (chessMoveValue == "") {
+            message = "Put in a chess move";
+            return;
+        }
+
         let comparison = compareWithAnswer(
             wordGuesses[currentActive],
             chessMoveValue,
@@ -185,6 +200,7 @@
     };
 </script>
 
+<GameError {message} />
 <Instructions />
 <div>Game #{currIndex}</div>
 <GameOver word={answer} move={chessAnswer} {statuses} {chessStatuses} />
