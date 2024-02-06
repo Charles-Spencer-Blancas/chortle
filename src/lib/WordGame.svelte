@@ -99,8 +99,17 @@
         }
     };
 
-    let compareWithAnswer = (guess, chessGuess) => {
+    let checkWord = (guess, answer) => {
+        let occurences = {};
         let out = [];
+
+        for (let i = 0; i < answer.length; i++) {
+            if (answer[i] in occurences) {
+                occurences[answer[i]] = occurences[answer[i]] + 1;
+            } else {
+                occurences[answer[i]] = 1;
+            }
+        }
 
         for (let i = 0; i < guess.length; i++) {
             if (guess[i] === answer[i]) {
@@ -115,6 +124,21 @@
 
             out[i] = 0;
         }
+
+        for (let i = 0; i < guess.length; i++) {
+            if (guess[i] in occurences) {
+                if (out[i] == 1 && occurences[guess[i]] <= 0) {
+                    out[i] = 0;
+                }
+                occurences[guess[i]] = occurences[guess[i]] - 1;
+            }
+        }
+
+        return out;
+    };
+
+    let compareWithAnswer = (guess, chessGuess) => {
+        let out = checkWord(guess, answer);
 
         if (chessDoneValue) {
             chessGuess = chessAnswer;
