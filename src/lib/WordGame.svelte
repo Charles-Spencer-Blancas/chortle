@@ -114,6 +114,7 @@
         for (let i = 0; i < guess.length; i++) {
             if (guess[i] === answer[i]) {
                 out[i] = 2;
+                occurences[guess[i]] = occurences[guess[i]] - 1;
                 continue;
             }
 
