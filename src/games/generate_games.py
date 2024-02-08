@@ -21,9 +21,14 @@ def get_fen_and_moves(line):
 
 def random_valid_word(letters, words):
     possible = []
-    for word in words:
-        if letters[0] in word and letters[1] in word:
-            possible += [word]
+    if letters[0] == letters[1]:
+        for word in words:
+            if word.count(letters[0]) >= 2:
+                possible += [word]
+    else:
+        for word in words:
+            if letters[0] in word and letters[1] in word:
+                possible += [word]
 
     return random.choice(possible)
 
