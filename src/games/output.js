@@ -1,4 +1,4 @@
-let games = [
+export let games = [
   {
     fen: "r6k/pp2r2p/4Rp1Q/3p4/8/1N1P2R1/PqP2bPP/7K b - - 0 24",
     moves: "f2g3 e6e7 b2b1 b3c1 b1c1 h6c1",
