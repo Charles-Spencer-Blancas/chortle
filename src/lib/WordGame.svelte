@@ -27,10 +27,6 @@
     ];
     let message = "";
 
-    function getRandomElement(array) {
-        let randomIndex = Math.floor(Math.random() * array.length);
-        return array[randomIndex];
-    }
     function getIndexForToday() {
         const oneDay = 24 * 60 * 60 * 1000; // hours*minutes*seconds*milliseconds
         const startDate = new Date("Wed Jan 31 2024");
@@ -114,7 +110,6 @@
         for (let i = 0; i < guess.length; i++) {
             if (guess[i] === answer[i]) {
                 out[i] = 2;
-                occurences[guess[i]] = occurences[guess[i]] - 1;
                 continue;
             }
 
